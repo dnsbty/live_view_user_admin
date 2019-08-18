@@ -1,6 +1,6 @@
 defmodule UserAdmin.Users do
   alias UserAdmin.Repo
-  alias UserAdmin.Users.User
+  alias UserAdmin.Users.{Role, User}
 
   @doc """
   Create a changeset to change a user.
@@ -18,5 +18,13 @@ defmodule UserAdmin.Users do
     %User{}
     |> User.changeset(attrs)
     |> Repo.insert()
+  end
+
+  @doc """
+  List all the roles in the database.
+  """
+  @spec list_roles :: list(Role.t())
+  def list_roles do
+    Repo.all(Role)
   end
 end

@@ -7,8 +7,9 @@ defmodule UserAdminWeb.UserLive.New do
 
   def mount(_session, socket) do
     changeset = Users.change_user(%User{})
+    roles = Users.list_roles()
 
-    {:ok, assign(socket, changeset: changeset)}
+    {:ok, assign(socket, changeset: changeset, roles: roles)}
   end
 
   def render(assigns) do

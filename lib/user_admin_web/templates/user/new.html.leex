@@ -5,13 +5,9 @@
     <%= text_input f, :name, id: "nameField" %>
     <%= error_tag f, :name %>
 
-    <label for="roleField">Role</label>
-    <select id="roleField">
-      <option value="admin">Administrator</option>
-      <option value="mod">Moderator</option>
-      <option value="user">User</option>
-      <option value="guest">Guest</option>
-    </select>
+    <%= label f, :role_id, for: "roleField" %>
+    <%= select f, :role_id, Enum.map(@roles, &{&1.name, &1.id}), id: "roleField" %>
+    <%= error_tag f, :role_id %>
 
     <div>
       <%= submit "Create", phx_disable_with: "Creating..." %>
