@@ -11,7 +11,7 @@ defmodule UserAdmin.Users.User do
 
   def changeset(user, changes \\ %{}) do
     user
-    |> cast(changes, [:name])
-    |> validate_required([:name])
+    |> cast(changes, [:name, :role_id])
+    |> validate_required([:name, :role_id])
   end
 end
