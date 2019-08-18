@@ -17,7 +17,7 @@ defmodule UserAdminWeb.Router do
   scope "/", UserAdminWeb do
     pipe_through :browser
 
-    get "/", PageController, :index
+    live "/users/new", UserLive.New
   end
 
   # Other scopes may use custom stacks.
