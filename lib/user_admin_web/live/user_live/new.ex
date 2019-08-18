@@ -1,9 +1,13 @@
 defmodule UserAdminWeb.UserLive.New do
   use Phoenix.LiveView
   alias UserAdminWeb.UserView
+  alias UserAdmin.Users
+  alias UserAdmin.Users.User
 
   def mount(_session, socket) do
-    {:ok, socket}
+    changeset = Users.change_user(%User{})
+
+    {:ok, assign(socket, changeset: changeset)}
   end
 
   def render(assigns) do

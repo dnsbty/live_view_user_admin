@@ -1,8 +1,8 @@
-<h2>New User</h2>
-<form>
+<%= f = form_for @changeset, "#", phx_submit: :create %>
   <fieldset>
-    <label for="nameField">Name</label>
-    <input type="text" id="nameField">
+    <%= label f, :name, for: "nameField" %>
+    <%= text_input f, :name, id: "nameField" %>
+
     <label for="roleField">Role</label>
     <select id="roleField">
       <option value="admin">Administrator</option>
@@ -10,8 +10,9 @@
       <option value="user">User</option>
       <option value="guest">Guest</option>
     </select>
+
     <div>
-      <input type="submit" value="Create">
+      <%= submit "Create", phx_disable_with: "Creating..." %>
     </div>
   </fieldset>
 </form>
