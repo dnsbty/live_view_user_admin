@@ -17,6 +17,7 @@ defmodule UserAdminWeb.Router do
   scope "/", UserAdminWeb do
     pipe_through :browser
 
+    live "/users", UserLive.Index
     live "/users/new", UserLive.New
   end
 

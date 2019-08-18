@@ -1,4 +1,5 @@
 defmodule UserAdmin.Users do
+  import Ecto.Query
   alias UserAdmin.Repo
   alias UserAdmin.Users.{Role, User}
 
@@ -26,5 +27,16 @@ defmodule UserAdmin.Users do
   @spec list_roles :: list(Role.t())
   def list_roles do
     Repo.all(Role)
+  end
+
+  @doc """
+  List all users in the database.
+  """
+  @spec list_users :: list(User.t())
+  def list_users do
+    User
+    |> join(:inner, [u], r in assoc(u, :role))
+    |> preload([_, r], role: r)
+    |> Repo.all()
   end
 end
