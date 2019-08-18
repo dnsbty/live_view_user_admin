@@ -4,6 +4,7 @@ defmodule UserAdminWeb.UserLive.Index do
   alias UserAdminWeb.UserView
 
   def mount(_session, socket) do
+    Users.subscribe()
     users = Users.list_users()
 
     {:ok, assign(socket, :users, users)}
@@ -11,5 +12,10 @@ defmodule UserAdminWeb.UserLive.Index do
 
   def render(assigns) do
     UserView.render("index.html", assigns)
+  end
+
+  def handle_info({Users, [:user | _], _}, socket) do
+    users = Users.list_users()
+    {:noreply, assign(socket, users: users)}
   end
 end

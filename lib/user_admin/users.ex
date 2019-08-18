@@ -3,6 +3,8 @@ defmodule UserAdmin.Users do
   alias UserAdmin.Repo
   alias UserAdmin.Users.{Role, User}
 
+  @topic inspect(__MODULE__)
+
   @doc """
   Create a changeset to change a user.
   """
@@ -19,6 +21,7 @@ defmodule UserAdmin.Users do
     %User{}
     |> User.changeset(attrs)
     |> Repo.insert()
+    |> broadcast_change([:user, :created])
   end
 
   @doc """
@@ -38,5 +41,20 @@ defmodule UserAdmin.Users do
     |> join(:inner, [u], r in assoc(u, :role))
     |> preload([_, r], role: r)
     |> Repo.all()
+  end
+
+  @doc """
+  Subscribe to updates to the user list.
+  """
+  @spec subscribe :: :ok | {:error, term()}
+  def subscribe do
+    Phoenix.PubSub.subscribe(UserAdmin.PubSub, @topic)
+  end
+
+  @spec broadcast_change({:ok, User.t()}, list(atom())) :: :ok | {:error, term()}
+  defp broadcast_change({:ok, result}, event) do
+    Phoenix.PubSub.broadcast(UserAdmin.PubSub, @topic, {__MODULE__, event, result})
+
+    {:ok, result}
   end
 end
