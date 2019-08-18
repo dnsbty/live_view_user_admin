@@ -1,6 +1,8 @@
 defmodule UserAdminWeb.Endpoint do
   use Phoenix.Endpoint, otp_app: :user_admin
 
+  socket "/live", Phoenix.LiveView.Socket
+
   socket "/socket", UserAdminWeb.UserSocket,
     websocket: true,
     longpoll: false

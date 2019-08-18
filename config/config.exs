@@ -12,6 +12,9 @@ config :user_admin,
 
 # Configures the endpoint
 config :user_admin, UserAdminWeb.Endpoint,
+  live_view: [
+    signing_salt: "IwFcfUnVjSG7O9hTsiJ8TgkxN3EfxGk7"
+  ],
   url: [host: "localhost"],
   secret_key_base: "PfiXnmVDb7TVU67+5YysxMvkY8dBR5FOzCYMugNTfTg3o5jTNViLeR7/1ASJ7HUL",
   render_errors: [view: UserAdminWeb.ErrorView, accepts: ~w(html json)],
