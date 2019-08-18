@@ -1,7 +1,9 @@
+<h2>New User</h2>
 <%= f = form_for @changeset, "#", phx_submit: :create %>
   <fieldset>
     <%= label f, :name, for: "nameField" %>
     <%= text_input f, :name, id: "nameField" %>
+    <%= error_tag f, :name %>
 
     <label for="roleField">Role</label>
     <select id="roleField">
