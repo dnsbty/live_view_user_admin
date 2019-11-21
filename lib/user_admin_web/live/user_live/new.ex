@@ -6,10 +6,11 @@ defmodule UserAdminWeb.UserLive.New do
   alias UserAdminWeb.Router.Helpers, as: Routes
 
   def mount(_session, socket) do
-    changeset = Users.change_user(%User{})
+    changeset = Users.change_user(%User{groups: []})
     roles = Users.list_roles()
+    groups = Users.list_groups()
 
-    {:ok, assign(socket, changeset: changeset, roles: roles)}
+    {:ok, assign(socket, changeset: changeset, groups: groups, roles: roles)}
   end
 
   def render(assigns) do

@@ -9,6 +9,10 @@
     <%= select f, :role_id, Enum.map(@roles, &{&1.name, &1.id}), id: "roleField" %>
     <%= error_tag f, :role_id %>
 
+    <%= label f, :group_ids, for: "groupField" %>
+    <%= multiple_select f, :group_ids, Enum.map(@groups, &{&1.name, &1.id}), id: "groupField" %>
+    <%= error_tag f, :group_ids %>
+
     <div>
       <%= submit "Create", phx_disable_with: "Creating..." %>
     </div>

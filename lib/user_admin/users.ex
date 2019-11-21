@@ -1,7 +1,7 @@
 defmodule UserAdmin.Users do
   import Ecto.Query
   alias UserAdmin.Repo
-  alias UserAdmin.Users.{Role, User}
+  alias UserAdmin.Users.{Group, Role, User}
 
   @topic inspect(__MODULE__)
 
@@ -22,6 +22,14 @@ defmodule UserAdmin.Users do
     |> User.changeset(attrs)
     |> Repo.insert()
     |> broadcast_change([:user, :created])
+  end
+
+  @doc """
+  List all the groups in the database.
+  """
+  @spec list_groups :: list(Group.t())
+  def list_groups do
+    Repo.all(Group)
   end
 
   @doc """
