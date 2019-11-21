@@ -18,7 +18,7 @@ defmodule UserAdminWeb.UserLive.New do
 
   def handle_event("create", %{"user" => attrs}, socket) do
     case Users.create_user(attrs) do
-      {:ok, user} ->
+      {:ok, _user} ->
         socket =
           socket
           |> put_flash(:info, "User successfully created")
