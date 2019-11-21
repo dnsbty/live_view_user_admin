@@ -3,12 +3,18 @@
   <thead>
     <th>Name</th>
     <th>Role</th>
+    <th>Groups</th>
   </thead>
   <tbody>
 <%= for user <- @users do %>
     <tr>
       <td><%= user.name %></td>
       <td><%= user.role.name %></td>
+      <td>
+<%= for group <- user.groups do %>
+        <%= group.name %><br />
+<% end %>
+      </td>
     </tr>
 <% end %>
   </tbody>

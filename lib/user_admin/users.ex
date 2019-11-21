@@ -47,7 +47,8 @@ defmodule UserAdmin.Users do
   def list_users do
     User
     |> join(:inner, [u], r in assoc(u, :role))
-    |> preload([_, r], role: r)
+    |> join(:left, [u, r], g in assoc(u, :groups))
+    |> preload([u, r, g], role: r, groups: g)
     |> Repo.all()
   end
 
