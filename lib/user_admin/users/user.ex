@@ -1,12 +1,13 @@
 defmodule UserAdmin.Users.User do
   use Ecto.Schema
-  alias UserAdmin.Users.Role
+  alias UserAdmin.Users.{Group, Role}
   import Ecto.Changeset
 
   schema "users" do
     field :name, :string
 
     belongs_to :role, Role
+    many_to_many :groups, Group, join_through: "user_groups"
   end
 
   def changeset(user, changes \\ %{}) do
