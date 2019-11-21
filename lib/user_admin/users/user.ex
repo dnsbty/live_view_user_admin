@@ -13,6 +13,7 @@ defmodule UserAdmin.Users.User do
   def changeset(user, changes \\ %{}) do
     user
     |> cast(changes, [:name, :role_id])
+    |> put_assoc(:groups, changes["groups"])
     |> validate_required([:name, :role_id])
   end
 end

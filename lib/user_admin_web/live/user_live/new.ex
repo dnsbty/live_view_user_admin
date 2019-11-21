@@ -18,6 +18,9 @@ defmodule UserAdminWeb.UserLive.New do
   end
 
   def handle_event("create", %{"user" => attrs}, socket) do
+    groups = groups_from_ids(socket.assigns.groups, attrs["group_ids"])
+    attrs = Map.put(attrs, "groups", groups)
+
     case Users.create_user(attrs) do
       {:ok, _user} ->
         socket =
@@ -30,5 +33,11 @@ defmodule UserAdminWeb.UserLive.New do
       {:error, changeset} ->
         {:noreply, assign(socket, changeset: changeset)}
     end
+  end
+
+  defp groups_from_ids(groups, ids) do
+    Enum.map(ids, fn id ->
+      Enum.find(groups, fn group -> inspect(group.id) == id end)
+    end)
   end
 end
