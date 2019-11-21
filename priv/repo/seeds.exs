@@ -11,10 +11,24 @@
 # and so on) as they will fail if something goes wrong.
 
 alias UserAdmin.Repo
-alias UserAdmin.Users.Role
+alias UserAdmin.Users.{Group, Role}
 
 roles = ~w(Administrator Moderator Editor User Guest)
 
 Enum.each(roles, fn name ->
   Repo.insert!(%Role{name: name})
+end)
+
+groups = [
+  "Backend Developers",
+  "Frontend Developers",
+  "Mobile Developers",
+  "Senior Developers",
+  "Tech Leads",
+  "Managers",
+  "Phoenix Book Club"
+]
+
+Enum.each(groups, fn name ->
+  Repo.insert!(%Group{name: name})
 end)
